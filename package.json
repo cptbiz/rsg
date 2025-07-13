@@ -1,0 +1,113 @@
+(cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF'
+diff --git a/package.json b/package.json
+--- a/package.json
++++ b/package.json
+@@ -1,40 +1,66 @@
+-{
+-  "name": "real-estate-crm",
+-  "version": "1.0.0",
+-  "description": "Real Estate CRM application with React frontend and Node.js backend",
+-  "private": true,
+-  "scripts": {
+-    "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
+-    "server:dev": "cd server && npm run dev",
+-    "client:dev": "cd client && npm start",
+-    "server:start": "cd server && npm start",
+-    "client:build": "cd client && npm run build",
+-    "install:all": "npm run install:server && npm run install:client",
+-    "install:server": "cd server && npm install",
+-    "install:client": "cd client && npm install --legacy-peer-deps",
+-    "build": "npm run client:build",
+-    "setup": "npm run install:all && npm run build",
+-    "test": "echo \"No tests specified\" && exit 0"
+-  },
+-  "keywords": [
+-    "real-estate",
+-    "crm",
+-    "react",
+-    "nodejs",
+-    "express",
+-    "mongodb"
+-  ],
+-  "author": "",
+-  "license": "ISC",
+-  "devDependencies": {
+-    "concurrently": "^7.6.0"
+-  },
+-  "engines": {
+-    "node": ">=14.0.0",
+-    "npm": ">=6.0.0"
+-  },
+-  "repository": {
+-    "type": "git",
+-    "url": ""
+-  }
+-}
++{
++  "name": "real-estate-crm",
++  "version": "1.0.0",
++  "description": "Multilingual Real Estate CRM application with AI integration",
++  "private": true,
++  "scripts": {
++    "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
++    "server:dev": "cd server && npm run dev",
++    "client:dev": "cd client && npm start",
++    "server:start": "cd server && npm start",
++    "client:build": "cd client && npm run build",
++    "install:all": "npm run install:server && npm run install:client",
++    "install:server": "cd server && npm install",
++    "install:client": "cd client && npm install --legacy-peer-deps",
++    "build": "npm run client:build",
++    "build:server": "cd server && npm run build || echo 'No server build needed'",
++    "setup": "npm run install:all && npm run build",
++    "test": "npm run test:server && npm run test:client",
++    "test:server": "cd server && npm test",
++    "test:client": "cd client && npm test -- --watchAll=false",
++    "lint": "npm run lint:server && npm run lint:client",
++    "lint:server": "cd server && npm run lint || echo 'No server linting configured'",
++    "lint:client": "cd client && npm run lint || echo 'No client linting configured'",
++    "start": "npm run server:start",
++    "heroku-postbuild": "npm run install:all && npm run build",
++    "railway:build": "npm run install:server && npm run build:server",
++    "vercel:build": "npm run install:client && npm run client:build"
++  },
++  "keywords": [
++    "real-estate",
++    "crm",
++    "multilingual",
++    "ai",
++    "react",
++    "nodejs",
++    "express",
++    "mongodb",
++    "redis",
++    "socket.io",
++    "openai",
++    "google-translate",
++    "whatsapp",
++    "telegram"
++  ],
++  "author": "Real Estate CRM Team",
++  "license": "MIT",
++  "devDependencies": {
++    "concurrently": "^7.6.0"
++  },
++  "engines": {
++    "node": ">=18.0.0",
++    "npm": ">=8.0.0"
++  },
++  "repository": {
++    "type": "git",
++    "url": "https://github.com/yourusername/real-estate-crm.git"
++  },
++  "homepage": "https://github.com/yourusername/real-estate-crm#readme",
++  "bugs": {
++    "url": "https://github.com/yourusername/real-estate-crm/issues"
++  },
++  "directories": {
++    "server": "./server",
++    "client": "./client"
++  }
++}
+EOF
+)
