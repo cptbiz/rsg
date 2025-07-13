@@ -1,0 +1,22 @@
+(cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF'
+diff --git a/server/railway.toml b/server/railway.toml
+--- a/server/railway.toml
++++ b/server/railway.toml
+@@ -0,0 +1,15 @@
++[build]
++builder = "nixpacks"
++
++[deploy]
++healthcheckPath = "/api/health"
++healthcheckTimeout = 300
++restartPolicyType = "on_failure"
++restartPolicyMaxRetries = 3
++
++[env]
++NODE_ENV = "production"
++PORT = "5001"
++
++[variables]
++NIXPACKS_NODE_VERSION = "18"
+EOF
+)
